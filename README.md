@@ -4,6 +4,23 @@ Customizable remote controls for mobile devices
 
 # Reference
 
+## Core
+
+These are base rc.js functions for managing applications and controllers.
+
+### Methods
+
+* **rc.initApp(id, callback)**
+
+    *id (String)*: A unique ID for the application  
+    *callback (Function)*: Called after the initialization is done; supplied `true` if successful and `false` otherwise  
+    Initializes an application so controllers can connect to it
+* **rc.initController(id, callback)**
+
+    *id (String)*: The ID of the application to connect to  
+    *callback (Function)*: Called after the initialization is done; supplied `true` if successful and `false` otherwise  
+    Connects a controller to an application
+
 ## Events
 
 The events module (`rc.events`) contains constants and functions to manage sending and receiving remote control events.
