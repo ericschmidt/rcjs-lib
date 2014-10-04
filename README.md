@@ -1,4 +1,71 @@
-rcjs-lib
+rc.js
 ========
+Customizable remote controls for mobile devices
 
-rc.js client-side JS library
+# Reference
+
+## Events
+
+The events module (`rc.events`) contains constants and functions to manage sending and receiving remote control events.
+
+### Constants
+
+* **rc.events.BUTTON_PRESS** = "rc_button_press"
+* **rc.events.BUTTON_RELEASE** = "rc_button_release"
+* **rc.events.TRACKPAD_PRESS** = "rc_trackpad_press"
+* **rc.events.TRACKPAD_MOVE** = "rc_trackpad_move"
+* **rc.events.TRACKPAD_RELEASE** = "rc_trackpad_release"
+* **rc.events.ACCELEROMETER** = "rc_accelerometer"
+
+### Methods
+
+* **rc.events.send(event, data)**
+
+    *event (String)*: The event type to trigger  
+    *data (Object)*: Data associated with the event  
+    Triggers a given event from the controller; can then be read by `rc.events.listen()` in the application
+* **rc.events.listen(event, handler)**
+
+    *event (String)*: The event type to listen for  
+    *handler (Function)*: The event handling function; is passed the data object associated with the event  
+    Attaches an event handler to a given event type
+
+## Widgets
+
+The widgets module (`rc.widgets`) contains useful pre-wired UI widgets for easily creating custom controllers.
+Using these widgets requires the `rc.css` stylesheet.
+
+### Classes
+
+* **rc.widgets.Button(name, x, y, width, height)**
+
+    *name (String)*: A name/label for the button  
+    *x (Number)*: The x position of the button  
+    *y (Number)*: The y position of the button  
+    *width (Number)*: The width of the button  
+    *height (Number)*: The height of the button  
+    A simple button.
+    Automatically sends the `rc.events.BUTTON_PRESS` and `rc.events.BUTTON_RELEASE` events with data of the form `{ name: String }`
+* **rc.widgets.Trackpad(name, x, y, width, height, maxX = 1, maxY = 1)**
+
+    *name (String)*: A name for the trackpad  
+    *x (Number)*: The x position of the trackpad  
+    *y (Number)*: The y position of the trackpad  
+    *width (Number)*: The width of the trackpad on the screen  
+    *height (Number)*: The height of the trackpad on the screen  
+    *maxX (Number)*: The maximum x value the trackpad will detect  
+    *maxY (Number)*: The maximum y value the trackpad will detect  
+    A trackpad widget.
+    Automatically sends the `rc.events.TRACKPAD_PRESS`, `rc.events.TRACKPAD_MOVE`, and `rc.events.TRACKPAD_RELEASE` events with data of the form
+    ```
+    {
+        name: String,
+        x: Number,
+        y: Number
+    }
+    ```
+
+----
+by Aaron Nojima, Eric Schmidt, Nayeon Kim  
+October 2014  
+www.rcjs.me
