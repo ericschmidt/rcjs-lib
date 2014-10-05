@@ -44,6 +44,7 @@
 
     // rc.startAccelerometer
     var _startAccelerometer = function() {
+        gyro.frequency = 200;
         gyro.startTracking(function(o) {
             _send("rc_accelerometer", o);
         });
