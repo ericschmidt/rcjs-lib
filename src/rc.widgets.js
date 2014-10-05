@@ -76,6 +76,7 @@
             };
             var _dragging = false;
             var _trackpadPress = function(e) {
+                e.preventDefault();
                 _dragging = true;
                 var t = _mobile ? e.changedTouches[0] : e;
                 var coords = _scaledCoordsFromPage(t.pageX, t.pageY);
@@ -86,6 +87,7 @@
                 });
             };
             var _trackpadMove = function(e) {
+                e.preventDefault();
                 if(_dragging) {
                     var t = _mobile ? e.changedTouches[0] : e;
                     var coords = _scaledCoordsFromPage(t.pageX, t.pageY);
@@ -97,6 +99,7 @@
                 }
             };
             var _trackpadRelease = function(e) {
+                e.preventDefault();
                 _dragging = false;
                 var t = _mobile ? e.changedTouches[0] : e;
                 var coords = _scaledCoordsFromPage(t.pageX, t.pageY);
