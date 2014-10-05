@@ -77,7 +77,7 @@
             var _dragging = false;
             var _trackpadPress = function(e) {
                 _dragging = true;
-                var t = _isMobile ? e.changedTouches[0] : e;
+                var t = _mobile ? e.changedTouches[0] : e;
                 var coords = _scaledCoordsFromPage(t.pageX, t.pageY);
                 rc.send(rc.events.TRACKPAD_PRESS, {
                     name: name,
@@ -87,7 +87,7 @@
             };
             var _trackpadMove = function(e) {
                 if(_dragging) {
-                    var t = _isMobile ? e.changedTouches[0] : e;
+                    var t = _mobile ? e.changedTouches[0] : e;
                     var coords = _scaledCoordsFromPage(t.pageX, t.pageY);
                     rc.send(rc.events.TRACKPAD_MOVE, {
                         name: name,
@@ -98,7 +98,7 @@
             };
             var _trackpadRelease = function(e) {
                 _dragging = false;
-                var t = _isMobile ? e.changedTouches[0] : e;
+                var t = _mobile ? e.changedTouches[0] : e;
                 var coords = _scaledCoordsFromPage(t.pageX, t.pageY);
                 rc.send(rc.events.TRACKPAD_RELEASE, {
                     name: name,
