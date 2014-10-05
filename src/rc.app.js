@@ -30,7 +30,7 @@
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4) {
                 if(xmlhttp.status == 200) {
-                    callback(xmlhttp.responseText);
+                    callback(JSON.parse(xmlhttp.responseText).id);
                 } else {
                     callback({error: "Could not generate ID"});
                 }
