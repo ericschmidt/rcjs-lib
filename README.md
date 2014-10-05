@@ -13,17 +13,27 @@ These are base rc.js functions for managing applications and controllers.
 * **rc.initApp(id, callback)**
 
     *id (String)*: A unique ID for the application  
-    *callback (Function)*: Called after the initialization is done; supplied `true` if successful and `false` otherwise  
-    Initializes an application so controllers can connect to it
+    *callback (Function)*: Called after the initialization is done  
+    Initializes an application so controllers can connect to it. If the initialization is successful, *callback* is passed an object of the form `{ success: Boolean }`; if the initialization fails, *callback* is passed an object of the form `{ error: String }`
 * **rc.initController(id, callback)**
 
     *id (String)*: The ID of the application to connect to  
-    *callback (Function)*: Called after the initialization is done; supplied `true` if successful and `false` otherwise  
-    Connects a controller to an application
+    *callback (Function)*: Called after the initialization is done  
+    Connects a controller to an application. If the connection is successful, *callback* is passed an object of the form `{ success: Boolean }`; if the connection fails, *callback* is passed an object of the form `{ error: String }`
+* **rc.send(event, data)**
+
+    *event (String)*: The event type to trigger  
+    *data (Object)*: Data associated with the event  
+    Triggers a given event from the controller; can then be read by `rc.listen()` in the application
+* **rc.listen(event, handler)**
+
+    *event (String)*: The event type to listen for  
+    *handler (Function)*: The event handling function; is passed the data object associated with the event  
+    Attaches an event handler to a given event type
 
 ## Events
 
-The events module (`rc.events`) contains constants and functions to manage sending and receiving remote control events.
+The events module (`rc.events`) contains constants defining different types of default events.
 
 ### Constants
 
@@ -33,19 +43,6 @@ The events module (`rc.events`) contains constants and functions to manage sendi
 * **rc.events.TRACKPAD_MOVE** = "rc_trackpad_move"
 * **rc.events.TRACKPAD_RELEASE** = "rc_trackpad_release"
 * **rc.events.ACCELEROMETER** = "rc_accelerometer"
-
-### Methods
-
-* **rc.events.send(event, data)**
-
-    *event (String)*: The event type to trigger  
-    *data (Object)*: Data associated with the event  
-    Triggers a given event from the controller; can then be read by `rc.events.listen()` in the application
-* **rc.events.listen(event, handler)**
-
-    *event (String)*: The event type to listen for  
-    *handler (Function)*: The event handling function; is passed the data object associated with the event  
-    Attaches an event handler to a given event type
 
 ## Widgets
 
