@@ -20,6 +20,14 @@ These are base rc.js functions for managing applications and controllers.
     *id (String)*: The ID of the application to connect to  
     *callback (Function)*: Called after the initialization is done  
     Connects a controller to an application. If the connection is successful, *callback* is passed an object of the form `{ success: Boolean }`; if the connection fails, *callback* is passed an object of the form `{ error: String }`
+* **rc.controller(handler)**
+
+    *handler (Function)*: Callback which is passed the id of the connected controller  
+    Calls *handler* when a new controller connects to the application and passes the controller's ID as an argument
+* **rc.disconnect(handler)**
+
+    *handler (Function)*: Called when a device disconnects  
+    In a main application, calls *handler* when a controller disconnects and passes the ID of the disconnected controller; in a controller, calls *handler* when the application stops running
 * **rc.send(event, data)**
 
     *event (String)*: The event type to trigger  
@@ -30,6 +38,22 @@ These are base rc.js functions for managing applications and controllers.
     *event (String)*: The event type to listen for  
     *handler (Function)*: The event handling function; is passed the data object associated with the event  
     Attaches an event handler to a given event type
+* **rc.startAccelerometer()**
+
+    Starts the accelerometer on the controller; periodically triggers `rc.events.ACCELEROMETER` events with data of the form
+    ```
+    {
+        x: Number,
+        y: Number,
+        z: Number,
+        alpha: Number,
+        beta: Number,
+        gamma: Number
+    }
+    ```
+* **rc.stopAccelerometer()**
+
+    Stops triggering accelerometer events.
 
 ## Events
 
@@ -80,6 +104,6 @@ Using these widgets requires the `rc.css` stylesheet.
     ```
 
 ----
-by Aaron Nojima, Eric Schmidt, Nayeon Kim  
+Aaron Nojima, Eric Schmidt, Nayeon Kim  
 October 2014  
 www.rcjs.me

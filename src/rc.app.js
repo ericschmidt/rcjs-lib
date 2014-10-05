@@ -16,6 +16,30 @@
     // The main WebSocket
     var _socket = io("http://www.rcjs.me:8000");
 
+    // rc.generateId
+    // Generates a unique application ID and passes it to callback
+    rc.generateId = function(callback) {
+        var xmlhttp;
+        if (win.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4) {
+                if(xmlhttp.status == 200) {
+                    callback(xmlhttp.responseText);
+                } else {
+                    callback({error: "Could not generate ID"});
+                }
+            }
+        };
+        xmlhttp.open("POST", "http://www.rcjs.me/generate_id", true);
+        xmlhttp.send();
+    };
+
     // rc.initApp
     rc.initApp = function(id, callback) {
         _socket.removeAllListeners("connection-error");
@@ -25,7 +49,7 @@
         });
         _socket.on("connection-success", function(data) {
             if(data) {
-                _bindListen();
+                _bindListeners();
                 callback({success: true});
             }
         });
@@ -41,9 +65,29 @@
         }
     };
 
-    function _bindListen() {
+    // rc.controller
+    var _controller = function(handler) {
+        _socket.removeAllListeners("controller-connect");
+        _socket.on("controller-connect", function(data) {
+            handler(data.id);
+        });
+    };
+
+    // rc.disconnect
+    var _disconnect = function(handler) {
+        _socket.removeAllListeners("controller-disconnect");
+        _socket.on("controller-disconnect", function(data) {
+            handler(data.id);
+        });
+    };
+
+    // Binds functions to the rc namespace once application is started
+    function _bindListeners() {
+        _socket.removeAllListeners("controller-event");
         _socket.on("controller-event", _handleEvent);
         rc.listen = _listen;
+        rc.controller = _controller;
+        rc.disconnect = _disconnect;
     }
 
     function _handleEvent(data) {

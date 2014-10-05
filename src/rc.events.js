@@ -7,8 +7,10 @@
 
 (function(win) {
     
+    // Create rc namespace
     var rc = win.rc = win.rc || {};
 
+    // Event type constants
     rc.events = {
         BUTTON_PRESS: "rc_button_press",
         BUTTON_RELEASE: "rc_button_release",

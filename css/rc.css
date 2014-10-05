@@ -1,0 +1,36 @@
+/**
+ * rc.css
+ * styles for rc.js widgets
+ *
+ */
+
+.rc-button {
+    /* background */
+    background-color: #000077;
+    /* text */
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 48px;
+    text-align: center;
+    color: #FFFFFF;
+    /* mouse */
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.rc-trackpad {
+    /* background */
+    background-color: #007700;
+    /* mouse */
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
