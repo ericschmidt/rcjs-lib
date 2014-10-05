@@ -104,6 +104,8 @@ Using these widgets requires the `rc.css` stylesheet.
     ```
 
 ----
+Shout outs to Socket.io and gyro.js for making this as seamless as possible!  
+  
 Aaron Nojima, Eric Schmidt, Nayeon Kim  
 October 2014  
 www.rcjs.me
